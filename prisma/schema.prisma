@@ -19,6 +19,8 @@ model Post {
   published Boolean  @default(false)
   author    User     @relation(fields: [authorId], references: [id])
   authorId  Int
+  viewCount Int      @default(0)
+  viewCountt Int      @default(0)
 }
 
 model User {
@@ -26,4 +28,12 @@ model User {
   email   String   @unique
   name    String?
   posts   Post[]
+  profile Profile?
+}
+
+model Profile {
+  id      Int     @id @default(autoincrement())
+  bio     String?
+  userId  Int     @unique
+  user    User    @relation(fields: [userId], references: [id])
 }

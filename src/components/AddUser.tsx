@@ -1,12 +1,15 @@
 'use client'
 
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 export default function FormAddUser() {
+    const router = useRouter();
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
 
-    const submitData = async () => {
+    const submitData = async (e: any) => {
+        e.preventDefault();
         try {
             const payload = { name, email }
             await fetch(`api/user`, {
@@ -14,6 +17,8 @@ export default function FormAddUser() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             })
+
+            router.push('/blog')
         } catch (err) {
             console.log(err);
 
