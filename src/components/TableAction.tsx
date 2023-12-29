@@ -1,14 +1,22 @@
 'use client'
 
-export default function TableAction({ userId }: any) {
+import { useRouter } from "next/navigation";
 
+
+export default function TableAction({ userId }: any) {
+    const router = useRouter();
     const deleteUser = async (id: any) => {
         console.log(id);
 
         try {
             await fetch(`api/user/${id}`, {
                 method: 'DELETE',
+                // body: JSON.stringify({
+                //     id: id,
+                // })
             })
+
+            router.refresh()
         } catch (err) {
             console.log(err);
 

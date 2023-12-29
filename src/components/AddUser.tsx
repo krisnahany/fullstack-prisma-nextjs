@@ -1,5 +1,6 @@
 'use client'
 
+import prisma from "@/lib/prisma";
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -18,7 +19,8 @@ export default function FormAddUser() {
                 body: JSON.stringify(payload)
             })
 
-            router.push('/blog')
+            // router.push('/blog')
+            router.refresh();
         } catch (err) {
             console.log(err);
 

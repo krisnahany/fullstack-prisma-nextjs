@@ -1,16 +1,24 @@
 import prisma from '@/lib/prisma'
 import TableAction from '@/components/TableAction';
 import FormAddUser from '@/components/AddUser';
-import { UserModels } from '@/model/Models';
+import { cache } from 'react';
+
+// export const revalidate = 1
+// export const dynamic = "force-dynamic";
 
 async function getData() {
-  // const user = await prisma.user.findMany();
   // const user = await UserModels.findMany();
-  // return user;
-  const res = await fetch('http://192.168.3.24:3000/api/users')
-  const { result } = await res.json()
-  return result
+  const user = await prisma.user.findMany();
+  return user;
+  // const res = await fetch('http://192.168.3.24:3000/api/users')
+  // const { result } = await res.json()
+  // return result
 }
+
+// const getData = cache(async () => {
+//   const user = await prisma.user.findMany();
+//   return user;
+// })
 
 export default async function Home() {
   const data = await getData();
@@ -29,7 +37,7 @@ export default async function Home() {
             </tr>
           </thead>
           <tbody className='[&>tr>td]:border [&>tr>td]:border-slate-300 [&>tr>td]:p-4'>
-            {data.map((d: any) => (
+            {data.map((d) => (
               <tr key={d.id}>
                 <td>{d.id}</td>
                 <td>{d.name}</td>
