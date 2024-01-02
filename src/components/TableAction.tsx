@@ -9,7 +9,7 @@ export default function TableAction({ userId }: any) {
         console.log(id);
 
         try {
-            await fetch(`api/user/${id}`, {
+            await fetch(`/api/user/${id}`, {
                 method: 'DELETE',
                 // body: JSON.stringify({
                 //     id: id,
